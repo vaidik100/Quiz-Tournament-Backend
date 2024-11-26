@@ -17,6 +17,9 @@ RUN mvn clean package -DskipTests
 # Use a slim JDK image for the runtime stage
 FROM openjdk:17-jdk-slim
 
+# Set the working directory for the runtime stage
+WORKDIR /app
+
 # Expose the application's port
 EXPOSE 8080
 
@@ -24,4 +27,4 @@ EXPOSE 8080
 COPY --from=build /app/target/QuizAPIBackend.jar api1.jar
 
 # Set the entrypoint to run the jar file
-ENTRYPOINT ["java", "-jar", "api1.jar"]
+ENTRYPOINT ["java", "-jar", "api1.jar"]
